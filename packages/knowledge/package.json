@@ -1,11 +1,14 @@
 {
-  "name": "@innovation-os/application",
+  "name": "@innovation-os/knowledge",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "exports": {
-    "./discovery": "./src/discovery/index.ts",
-    "./knowledge": "./src/knowledge/index.ts"
+    "./fact": "./src/fact/index.ts",
+    "./relation": "./src/relation/index.ts",
+    "./graph": "./src/graph/index.ts",
+    "./repository": "./src/repository/index.ts",
+    "./embedding": "./src/embedding/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
@@ -15,8 +18,7 @@
   "dependencies": {
     "@innovation-os/shared": "workspace:*",
     "@innovation-os/foundation": "workspace:*",
-    "@innovation-os/domain": "workspace:*",
-    "@innovation-os/knowledge": "workspace:*"
+    "@innovation-os/domain": "workspace:*"
   },
   "devDependencies": {
     "typescript": "*",

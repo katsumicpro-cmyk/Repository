@@ -7,15 +7,13 @@
     "paths": {
       "@innovation-os/shared/*": ["../shared/src/*"],
       "@innovation-os/foundation/*": ["../foundation/src/*"],
-      "@innovation-os/domain/*": ["../domain/src/*"],
-      "@innovation-os/knowledge/*": ["../knowledge/src/*"]
+      "@innovation-os/domain/*": ["../domain/src/*"]
     }
   },
   "references": [
     { "path": "../shared" },
     { "path": "../foundation" },
-    { "path": "../domain" },
-    { "path": "../knowledge" }
+    { "path": "../domain" }
   ],
   "include": ["src/**/*"]
 }
