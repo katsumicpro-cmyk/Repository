@@ -10,7 +10,8 @@
     "./repository": "./src/repository/index.ts",
     "./embedding": "./src/embedding/index.ts",
     "./recall": "./src/recall/index.ts",
-    "./reasoning": "./src/reasoning/index.ts"
+    "./reasoning": "./src/reasoning/index.ts",
+    "./research": "./src/research/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

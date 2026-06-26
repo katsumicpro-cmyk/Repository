@@ -18,3 +18,6 @@ export * from './recall/index.js'
 
 // Reasoning
 export * from './reasoning/index.js'
+
+// Research
+export * from './research/index.js'
