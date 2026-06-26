@@ -19,6 +19,11 @@ Innovation OS は「問いを育てるOS」である。
 その全プロセスを  
 AIと人間が共同で完走できるシステムを構築する。
 
+> **TODO**
+> - [ ] プロダクトとしての成功指標を定義する
+> - [ ] ユーザーペルソナを明記する
+> - [ ] Innovation OS が解く「問い」の具体例を追加する
+
 ---
 
 ## Architecture Principles
@@ -61,6 +66,11 @@ UIから実装を始めない。Domainから始める。
 | `infrastructure` | `shared`, `foundation`, `domain`, `@supabase/supabase-js` | `apps/*` |
 | `apps/web` | すべてのpackages | — |
 
+> **TODO**
+> - [ ] `packages/workflow` の依存ルールを追加する
+> - [ ] Circular dependency 検出の CI ステップを定義する
+> - [ ] モノレポ内のバージョン整合性ポリシーを記載する
+
 ---
 
 ## Knowledge First
@@ -71,6 +81,11 @@ UIから実装を始めない。Domainから始める。
 - Knowledgeなき状態でPatternを生成してはならない
 - 各Sprintで生成されたKnowledgeは次Sprintに引き継がれる
 - `docs/PROJECT_MEMORY.md` はKnowledgeの要約であり、Gitで管理する
+
+> **TODO**
+> - [ ] Knowledge の「鮮度」管理ポリシーを定義する（TTL、再生成条件）
+> - [ ] Knowledge Asset の品質スコア基準を決める
+> - [ ] Knowledge の可視化方針（Graph UI）を記載する
 
 ---
 
@@ -109,6 +124,12 @@ UIから実装を始めない。Domainから始める。
 - IDにビジネスロジックを持たせない
 - ランダム生成は `generateId()` のみ使用する
 
+> **TODO**
+> - [ ] Bounded Context マップを図として追加する
+> - [ ] 5ドメイン間のドメインイベントフロー図を追加する
+> - [ ] ドメインサービス (DomainService) の使用基準を明記する
+> - [ ] Aggregateサイズのガイドライン（何をAggregateに含めるか）を追加する
+
 ---
 
 ## Prompt Design Rules
@@ -139,6 +160,12 @@ UIから実装を始めない。Domainから始める。
 - 禁止事項 (Constraints) を必ず明記する
 - プロンプト変更後は `packages/ai-core/src/evaluator/` でスコアを計測する
 
+> **TODO**
+> - [ ] 各ドメインのプロンプト初版 (v1) を作成する
+> - [ ] Evaluatorのスコアリング基準（precision / recall / format compliance）を定義する
+> - [ ] プロンプトのA/Bテスト手順を追加する
+> - [ ] Few-shot examples の管理場所とフォーマットを決める
+
 ---
 
 ## Agent Rules
@@ -161,6 +188,12 @@ UIから実装を始めない。Domainから始める。
 - 失敗時は `packages/ai-core/retry/` のRetry戦略に従う
 - AgentはStatelessである — StateはWorkflow層が管理する
 
+> **TODO**
+> - [ ] 各AgentのInput / Output JSON Schema を定義する
+> - [ ] Agent間のメモリ共有ポリシーを定義する（`packages/ai-core/memory/`）
+> - [ ] Retry戦略の詳細（最大回数・バックオフ・フォールバック）を記載する
+> - [ ] LangGraph移行時のAgent互換性ガイドラインを追加する
+
 ---
 
 ## Repository Rules
@@ -172,6 +205,12 @@ UIから実装を始めない。Domainから始める。
 - Mock実装は `mock-*.ts` のプレフィックスを付ける
 - `any` 型の使用禁止 (`biome: noExplicitAny: error`)
 - `throw` はinfrastructure層のみ許可。domain / application層では `Result` を返す
+
+> **TODO**
+> - [ ] `packages/foundation/src/{entity,aggregate,...}` の旧DDD deprecated ファイルを削除する
+> - [ ] テストカバレッジ目標値（ドメイン層 >80%）を記載する
+> - [ ] `pnpm typecheck --build` の Project References 完全対応を確認する
+> - [ ] Biome ルールセットのカスタマイズ方針を追加する
 
 ---
 
@@ -199,6 +238,11 @@ UIから実装を始めない。Domainから始める。
 - [ ] ドメインオブジェクトをClientに渡す前にDTOへ変換しているか
 - [ ] Server ActionがResultをunwrapしてDTOを返しているか
 
+> **TODO**
+> - [ ] PR テンプレート (`.github/pull_request_template.md`) を作成する
+> - [ ] セキュリティレビューチェックリスト (L4) を `protocols/REVIEW_PROTOCOL.md` から統合する
+> - [ ] パフォーマンスレビュー基準（N+1クエリ、Vector検索コスト）を追加する
+
 ---
 
 ## ADR Rules
@@ -208,6 +252,11 @@ UIから実装を始めない。Domainから始める。
 - ステータス: `Proposed` → `Accepted` → `Deprecated`
 - ADRは削除しない。Deprecatedに変更する
 - 軽量な決定は `docs/DECISIONS.md` に記録する
+
+> **TODO**
+> - [ ] ADR テンプレートファイル (`docs/adr/TEMPLATE.md`) を作成する
+> - [ ] ADR 004: Knowledge Graph 設計方針を作成する
+> - [ ] ADR 005: Workflow Engine (LangGraph互換) 設計を作成する
 
 ---
 
@@ -241,3 +290,9 @@ refactor: リファクタリング
 test:   テスト追加
 chore:  設定・ツール変更
 ```
+
+> **TODO**
+> - [ ] Semantic Release の自動化設定を追加する
+> - [ ] Staging / Production 環境へのデプロイ手順を記載する
+> - [ ] Feature Flag ポリシーを定義する
+> - [ ] `docs/PROJECT_STATE.json` の自動更新 (CI hook) を検討する
