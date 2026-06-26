@@ -1,0 +1,101 @@
+{
+  "project": "Innovation OS",
+  "lastUpdated": "2026-06-27",
+  "repository": "https://github.com/katsumicpro-cmyk/Repository",
+  "branch": "main",
+  "lastCommit": "b408796",
+  "lastCommitMessage": "feat: establish abstraction pipeline",
+
+  "currentSprint": 7,
+  "currentSprintStatus": "complete",
+  "nextSprint": 8,
+  "nextSprintName": "Judgment Engine",
+
+  "sourceFiles": 146,
+
+  "packages": {
+    "shared": {
+      "exports": ["result", "errors", "events", "constants", "types"],
+      "status": "stable"
+    },
+    "foundation": {
+      "exports": ["ids", "time", "logger", "cache", "validation"],
+      "status": "stable"
+    },
+    "domain": {
+      "exports": ["core", "discovery", "pattern", "principle", "future", "concept"],
+      "note": "旧世代。DDD building blocks は foundation に移行済み",
+      "status": "stable"
+    },
+    "knowledge": {
+      "exports": [
+        "fact", "relation", "graph", "repository",
+        "embedding", "recall", "reasoning", "research", "learning", "principle"
+      ],
+      "status": "active",
+      "lastAdded": "principle (Invariant, Principle, PatternToInvariantExtractor, InvariantToPrincipleTranslator)"
+    },
+    "application": {
+      "modules": [
+        "discovery", "knowledge", "reasoning", "research", "learning", "principle"
+      ],
+      "status": "active",
+      "lastAdded": "principle (ExtractInvariantsUseCase, DerivePrinciplesUseCase)"
+    },
+    "infrastructure": {
+      "exports": ["embedding/http-embedding-port"],
+      "status": "minimal"
+    },
+    "web": {
+      "status": "scaffold only"
+    }
+  },
+
+  "capabilities": {
+    "sprint1": { "name": "Infrastructure Foundation", "status": "complete" },
+    "sprint2": { "name": "Discovery Creation", "status": "complete" },
+    "sprint3": { "name": "Knowledge Foundation", "status": "complete" },
+    "sprint4": { "name": "Semantic Memory", "status": "complete" },
+    "sprint5": { "name": "Reasoning", "status": "complete" },
+    "sprint6": { "name": "Research", "status": "complete" },
+    "sprint7a": { "name": "Learning Cycle", "status": "complete" },
+    "sprint7b": { "name": "Invariant Discovery", "status": "complete" },
+    "sprint8": { "name": "Judgment Engine", "status": "next" },
+    "sprint9": { "name": "Concept Synthesis", "status": "pending" },
+    "sprint10": { "name": "Innovation Loop", "status": "pending" }
+  },
+
+  "keyEntities": {
+    "KnowledgeFact": { "id": "PrefixedId<'kfct'>", "package": "knowledge/fact" },
+    "KnowledgeGraph": { "id": "PrefixedId<'kgrph'>", "package": "knowledge/graph" },
+    "Hypothesis": { "id": "PrefixedId<'hypo'>", "status": "pending|supported|refuted|accepted", "package": "knowledge/reasoning" },
+    "EvidenceRequest": { "id": "PrefixedId<'evreq'>", "status": "open|answered|abandoned", "package": "knowledge/reasoning" },
+    "ResearchPlan": { "id": "PrefixedId<'rplan'>", "status": "planned|in_progress|completed|abandoned", "package": "knowledge/research" },
+    "ResearchTrace": { "steps": "question|planner|search|evidence|evaluation|decision|new_questions", "package": "knowledge/research" },
+    "LearningCycle": { "id": "PrefixedId<'lcyc'>", "status": "running|completed|failed", "package": "knowledge/learning" },
+    "Invariant": { "id": "PrefixedId<'invt'>", "status": "candidate|validated|refuted|superseded", "type": "causal|structural|threshold|conservation", "package": "knowledge/principle" },
+    "Principle": { "id": "PrefixedId<'prpl'>", "status": "draft|active|deprecated", "package": "knowledge/principle" }
+  },
+
+  "ports": {
+    "EmbeddingPort": { "mock": "MockEmbeddingPort", "prod": "HttpEmbeddingPort" },
+    "KnowledgeSourcePort": { "mock": "MockKnowledgeSourcePort", "prod": "未実装" },
+    "EvidenceEvaluator": { "impls": ["StatisticalEvaluator", "ScientificEvaluator", "BusinessEvaluator", "DesignEvaluator"] },
+    "SourcePlanner": { "impls": ["RoundRobinSourcePlanner", "TypeMatchSourcePlanner"] }
+  },
+
+  "governance": {
+    "D001": "Result<T,E> over exceptions",
+    "D002": "Immutable domain objects",
+    "D003": "Port abstraction for all external I/O",
+    "D004": "PrefixedId for all entities",
+    "D005": "Sprint completion = capability acquisition, not code completion"
+  },
+
+  "constraints": {
+    "noAI": "DomainはAIを知らない",
+    "noSupabase": "まだ使わない",
+    "noExplicitAny": "Biome で error",
+    "buildOrder": "Foundation → Domain → Application → Infrastructure → Presentation"
+  }
+}
