@@ -1,8 +1,9 @@
+import { ResearchWorkspaceClient } from './_components/ResearchWorkspaceClient'
+
+/**
+ * ResearchWorkspacePage — Server Component entry point.
+ * Static shell; all interactivity delegated to ResearchWorkspaceClient.
+ */
 export default function ResearchWorkspacePage() {
-  return (
-    <main className="flex-1 p-6">
-      <h1 className="text-2xl font-bold">Research Workspace</h1>
-      <p className="mt-2 text-gray-600">Capture and process Discoveries → Patterns</p>
-    </main>
-  )
+  return <ResearchWorkspaceClient />
 }

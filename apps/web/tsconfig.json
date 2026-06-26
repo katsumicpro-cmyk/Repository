@@ -13,13 +13,15 @@
       "@/*": ["./src/*"],
       "@innovation-os/shared/*": ["../../packages/shared/src/*"],
       "@innovation-os/foundation/*": ["../../packages/foundation/src/*"],
-      "@innovation-os/domain/*": ["../../packages/domain/src/*"]
+      "@innovation-os/domain/*": ["../../packages/domain/src/*"],
+      "@innovation-os/application/*": ["../../packages/application/src/*"]
     }
   },
   "references": [
     { "path": "../../packages/shared" },
     { "path": "../../packages/foundation" },
-    { "path": "../../packages/domain" }
+    { "path": "../../packages/domain" },
+    { "path": "../../packages/application" }
   ],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

@@ -1,0 +1,23 @@
+{
+  "name": "@innovation-os/application",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./discovery": "./src/discovery/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "biome check ./src"
+  },
+  "dependencies": {
+    "@innovation-os/shared": "workspace:*",
+    "@innovation-os/foundation": "workspace:*",
+    "@innovation-os/domain": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "*",
+    "vitest": "*"
+  }
+}
