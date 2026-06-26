@@ -12,3 +12,9 @@ export * from './repository/index.js'
 
 // Embedding
 export * from './embedding/index.js'
+
+// Recall
+export * from './recall/index.js'
+
+// Reasoning
+export * from './reasoning/index.js'

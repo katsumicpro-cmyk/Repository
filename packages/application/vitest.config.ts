@@ -35,6 +35,7 @@ export default defineConfig({
       '@innovation-os/knowledge/repository':  pkg('knowledge/src/repository/index.ts'),
       '@innovation-os/knowledge/embedding':   pkg('knowledge/src/embedding/index.ts'),
       '@innovation-os/knowledge/recall':      pkg('knowledge/src/recall/index.ts'),
+      '@innovation-os/knowledge/reasoning':   pkg('knowledge/src/reasoning/index.ts'),
     },
   },
 })

@@ -26,6 +26,8 @@ export default defineConfig({
       '@innovation-os/domain/core':       pkg('domain/src/core/index.ts'),
       '@innovation-os/knowledge/fact':        'src/fact/index.ts',
       '@innovation-os/knowledge/embedding':   'src/embedding/index.ts',
+      '@innovation-os/knowledge/reasoning':   'src/reasoning/index.ts',
+      '@innovation-os/knowledge/recall':      'src/recall/index.ts',
     },
   },
 })

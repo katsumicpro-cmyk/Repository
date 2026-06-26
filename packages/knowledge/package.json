@@ -9,7 +9,8 @@
     "./graph": "./src/graph/index.ts",
     "./repository": "./src/repository/index.ts",
     "./embedding": "./src/embedding/index.ts",
-    "./recall": "./src/recall/index.ts"
+    "./recall": "./src/recall/index.ts",
+    "./reasoning": "./src/reasoning/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

@@ -5,7 +5,8 @@
   "type": "module",
   "exports": {
     "./discovery": "./src/discovery/index.ts",
-    "./knowledge": "./src/knowledge/index.ts"
+    "./knowledge": "./src/knowledge/index.ts",
+    "./reasoning": "./src/reasoning/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
