@@ -21,3 +21,6 @@ export * from './reasoning/index.js'
 
 // Research
 export * from './research/index.js'
+
+// Learning
+export * from './learning/index.js'

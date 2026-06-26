@@ -2,11 +2,13 @@ import { ValueObject } from '@innovation-os/domain/core'
 import { systemClock } from '@innovation-os/foundation/time'
 
 export type TraceStepType =
-  | 'question'    // EvidenceRequest received and loaded
-  | 'search'      // KnowledgeSourcePort.acquire() called for a ResearchQuestion
-  | 'evidence'    // All collected facts aggregated
-  | 'evaluation'  // EvidenceEvaluator produced a verdict
-  | 'decision'    // Knowledge updated; Hypothesis/EvidenceRequest lifecycle advanced
+  | 'question'      // EvidenceRequest received and loaded
+  | 'planner'       // SourcePlanner selected which KnowledgeSources to use
+  | 'search'        // KnowledgeSourcePort.acquire() called for a ResearchQuestion
+  | 'evidence'      // All collected facts aggregated
+  | 'evaluation'    // EvidenceEvaluator produced a verdict
+  | 'decision'      // Knowledge updated; Hypothesis/EvidenceRequest lifecycle advanced
+  | 'new_questions' // New EvidenceRequests generated from updated knowledge (re-reasoning)
 
 export type ResearchTraceStep = {
   readonly stepType: TraceStepType
