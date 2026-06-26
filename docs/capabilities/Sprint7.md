@@ -1,84 +1,104 @@
-# Sprint 7 — Knowledge Acquisition: 世界を調査する
+# Sprint 7 — Invariant Discovery: 不変条件の発見
 
 ## Before
 
-Sprint 6 までの Innovation OS は「閉じた知識システム」だった。
+Sprint 6 まで、Innovation OS は「事実の収集・推論・仮説検証」ができた。
+しかし、抽出できた知識はすべて「このグラフで観測された現象」に留まっていた。
 
-- 知っていることについて推論できる
-- 自分の知識から矛盾を発見できる
-- 仮説を生成し、証拠を評価できる
-- **しかし、新しい知識の源泉は人間が手動で追加する Discovery のみ**
+- Pattern: 「このデータセットで A → B が繰り返し現れる」(現象)
+- Hypothesis: 「このドメインで A が B を引き起こす」(領域限定の主張)
 
-システムは自分の知識世界の中でしか成長できなかった。
-知識は推論できたが、学習できなかった。
+**世界が変わっても成立する本質的な条件** を発見する能力がなかった。
 
 ## Capability
 
-**Knowledge Acquisition** — 閉じた知識から、世界を調査する知識システムへ。
+**Pattern / Invariant / Principle の責務分離**
 
-### LearningCycle Entity
-一回の知的活動全体を記録する単位。
+### Pattern — 現象 (observation)
+- 「このグラフで何が繰り返し観測されているか」
+- ライフサイクルなし。ただの観測記録。
+- 属性: `patternType`, `strength`, `facts`, `description`
+- `status` は存在しない。Pattern は正しいか誤っているかではなく、観測されたかどうかだけを表す。
+
+### Invariant — 本質 (essence)
+- 「世界が変わっても成立する不変条件」
+- ライフサイクルあり: `candidate → validated / refuted / superseded`
+- `stabilityScore` = 失敗したチャレンジ数 / 全チャレンジ数
+  - 0.0 = 未検証 (誰もまだ否定しようとしていない)
+  - 1.0 = 全チャレンジを生き残った
+- ドメインを持たない。普遍的。
+- `canBeTranslatedToPrinciple()` は `status === 'validated'` のみ `true`
+
+### Principle — 処方 (prescription)
+- 「この不変条件を、このドメインでどう使うか」
+- ライフサイクルあり: `draft → active → deprecated`
+- 必ず `sourceInvariantId` を持つ (Invariantなしに生まれない)
+- 同じ Invariant + 異なるドメイン → 異なる Principle
+
+### PatternToInvariantExtractor
+決定論的変換:
 ```
-trigger → hypotheses → researchPlans → collectedEvidence → knowledgeChanges → newQuestions
+causal_chain pattern    → causal Invariant (推移的因果は変化しない)
+hub_convergence pattern → structural Invariant (収束点は構造的重要性を維持する)
+bridge_fact pattern     → structural Invariant (ブリッジ除去で接続が失われる)
+high_confidence_cluster → threshold Invariant (証拠密度の閾値を超えると結論が安定する)
 ```
-「システムが何をいつ学んだか」が追跡可能になった。
 
-### SourcePlanner
-どの知識源をどの問いに使うかを決定する知的層。
-- `RoundRobinSourcePlanner` — 全ソースを使う (MVP)
-- `TypeMatchSourcePlanner` — 問いの型でソースをマッチング
-  - `causal` → knowledge_base
-  - `structural` → knowledge_base
-  - `empirical` → academic, web (future)
-  - `behavioral` → slack, notion (future)
-
-### ResearchTrace 拡張 (Sprint 6 → Sprint 7)
-`'planner'` と `'new_questions'` ステップを追加。
-Question → Planner → Search → Evidence → Evaluation → Decision → NewQuestions
-
-### RunLearningCycleUseCase
-6フェーズの閉ループ:
-1. **REASON** — InitiateReasoningCycle → 仮説 + EvidenceRequest
-2. **SELECT SOURCES** — SourcePlanner が知識源を決定
-3. **ACQUIRE** — KnowledgeSourcePort.acquire() → 証拠収集
-4. **EVALUATE + INTEGRATE** — EvidenceEvaluator → 知識更新
-5. **RE-REASON** — 更新された知識グラフで再推論 → 新しい問いを生成
-6. **COMPLETE** — LearningCycle を記録
+### InvariantToPrincipleTranslator
+ドメインパラメータ化翻訳:
+```
+structural Invariant × ソフトウェアアーキテクチャ
+  → 「多くのモジュールが依存するAPIは変更凍結すること」
+structural Invariant × 組織設計
+  → 「情報が集中する人物を排除し、権限を分散すること」
+```
+同じ Invariant から、ドメイン数だけ Principle が生まれる。
 
 ## Evidence
 
 ```typescript
-const result = await runLearningCycle.execute({ theme, trigger: 'manual' })
-// result.value.cycle.isActivelyLearning() === true
-// → knowledgeChanges.length > 0 OR newQuestionsGenerated.length > 0
-// → 人間の介入なしに Reason → Research → Update → ReReason の閉ループが成立
+// Pattern: no status, no claim, no domain
+// @ts-expect-error
+expect(pattern.status).toBeUndefined()
+
+// Invariant: lifecycle
+expect(inv.status).toBe('candidate')
+inv = inv.challenge('...').surviveChallenge().validate()
+expect(inv.status).toBe('validated')
+expect(inv.canBeTranslatedToPrinciple()).toBe(true)
+
+// Principle: domain-specific, traceable to Invariant
+expect(principle.sourceInvariantId).toBe(inv.id)
+expect(principle.domain).toBe('ソフトウェアアーキテクチャ')
+expect(principle.isActionable()).toBe(false) // starts as draft
+principle = principle.activate()
+expect(principle.isActionable()).toBe(true)
 ```
 
-テスト: `run-learning-cycle.use-case.test.ts` — 11テスト
-- `[CAPABILITY] cycle.isActivelyLearning() proves the system is in a learning loop`
-- `[CAPABILITY] full proof: Reason → Source → Acquire → Evaluate → Integrate → ReReason`
-- `[CAPABILITY] pluggable evaluator: BusinessEvaluator changes epistemology`
-- `[CAPABILITY] LearningCycle is persisted and retrievable`
+テスト: 21テスト (extract-invariants × 6 + derive-principles × 10 + domain objects × 5)
+- `[RESPONSIBILITY] Invariant lifecycle: candidate → challenged → survived → validated`
+- `[RESPONSIBILITY] Invariant can be refuted — unlike Pattern`
+- `[RESPONSIBILITY] Principle must always come from an Invariant`
+- `[RESPONSIBILITY] same Invariant → different domains → different Principles`
+- `[CAPABILITY] full proof: KnowledgeFacts → Pattern → Invariant → Principle (traceable chain)`
 
 ## Limitations
 
-- `KnowledgeSourcePort` の実装は `MockKnowledgeSourcePort` のみ (knowledge_base 内検索)
-  - 本当の「外部世界からの獲得」はまだない — Sprint 8 で Web / Academic 接続が必要
-- `TypeMatchSourcePlanner` は静的マッピング — Claude による動的ルーティングは将来
-- ResearchTrace の planner ステップは時系列的に末尾に追記される (append-only 制約)
-- newQuestionsGenerated が少ない可能性 — Mock の知識グラフが小さいため
+- `autoValidateCandidates: true` は MVP のショートカット
+  - 本来は `challenge → surviveChallenge` を繰り返してから `validate`
+  - 将来: `ChallengeInvariantUseCase` が必要
+- `InvariantToPrincipleTranslator` の翻訳テーブルは静的マッピング
+  - 未知ドメインは汎用翻訳にフォールバック
+  - 将来: Claude による動的翻訳 (AIはまだ呼ばない)
+- Principle は生成直後 `draft` のまま
+  - 活性化 (activate) は今のところ手動
+  - 将来: `ValidateAndActivatePrincipleUseCase` が必要
 
-## Next Capability — Sprint 8: Principle Extraction
+## Next Capability — Sprint 8: Principle Application
 
-複数の `supported Hypothesis` から **共通原理 (Principle)** を抽出する能力。
+活性化した Principle を使って、新しい Discovery や Hypothesis を評価する能力。
 
-LearningCycle が積み重なると、繰り返し supported される仮説のパターンが現れる。
-そのパターンを `Principle` エンティティとして結晶化する。
+「この Discovery は、すでに知られた Principle に合致するか、それとも矛盾するか？」
 
-Sprint 8 後、Innovation OS は:
-- 事実から仮説を生成し (Sprint 5)
-- 仮説を検証し (Sprint 6)
-- 学習ループを自律実行し (Sprint 7)
-- 検証済み仮説から原理を抽出する (Sprint 8)
-
-という知的進化のサイクルを持つ。
+Principle が知識評価の基準になったとき、Innovation OS は蓄積した知識で
+新しい観察を能動的に解釈できるようになる。

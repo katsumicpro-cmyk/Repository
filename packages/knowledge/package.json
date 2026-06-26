@@ -12,7 +12,8 @@
     "./recall": "./src/recall/index.ts",
     "./reasoning": "./src/reasoning/index.ts",
     "./research": "./src/research/index.ts",
-    "./learning": "./src/learning/index.ts"
+    "./learning": "./src/learning/index.ts",
+    "./principle": "./src/principle/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
