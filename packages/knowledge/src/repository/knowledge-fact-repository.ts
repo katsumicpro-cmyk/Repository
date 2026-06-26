@@ -27,12 +27,14 @@ export interface KnowledgeFactRepository extends Repository<KnowledgeFact, Knowl
    * Parameters:
    *   queryVector: the embedding to search against
    *   topK:        number of results to return
+   *   threshold:   minimum cosine similarity score (0–1, default 0)
    *
-   * Mock implementation: returns all facts (no real similarity ranking).
+   * Mock implementation: computes cosine similarity in-memory.
    * Supabase implementation: uses pgvector <=> operator.
    */
   findSimilar(
     queryVector: readonly number[],
     topK: number,
+    threshold?: number,
   ): Promise<Result<readonly KnowledgeFact[], AppError>>
 }

@@ -1,4 +1,17 @@
 import { ok, err, type Result } from '@innovation-os/shared/result'
+
+/** In-memory cosine similarity — used for MockKnowledgeFactRepository.findSimilar() */
+function cosineSim(a: readonly number[], b: readonly number[]): number {
+  if (a.length !== b.length || a.length === 0) return 0
+  let dot = 0, normA = 0, normB = 0
+  for (let i = 0; i < a.length; i++) {
+    dot += (a[i] ?? 0) * (b[i] ?? 0)
+    normA += (a[i] ?? 0) ** 2
+    normB += (b[i] ?? 0) ** 2
+  }
+  const denom = Math.sqrt(normA) * Math.sqrt(normB)
+  return denom === 0 ? 0 : dot / denom
+}
 import { notFound } from '@innovation-os/shared/errors'
 import type { AppError } from '@innovation-os/shared/errors'
 import type { PaginationParams, Page } from '@innovation-os/domain/core'
@@ -46,9 +59,19 @@ export class MockKnowledgeFactRepository implements KnowledgeFactRepository {
     return ok([...this.store.values()].filter((f) => !f.hasEmbedding()))
   }
 
-  async findSimilar(_queryVector: readonly number[], topK: number): Promise<Result<readonly KnowledgeFact[], AppError>> {
-    // Mock: return first topK facts regardless of similarity
-    return ok([...this.store.values()].slice(0, topK))
+  async findSimilar(
+    queryVector: readonly number[],
+    topK: number,
+    threshold = 0,
+  ): Promise<Result<readonly KnowledgeFact[], AppError>> {
+    const scored = [...this.store.values()]
+      .filter((f) => f.hasEmbedding())
+      .map((f) => ({ f, sim: cosineSim(queryVector, f.embedding!.vector) }))
+      .filter(({ sim }) => sim >= threshold)
+      .sort((a, b) => b.sim - a.sim)
+      .slice(0, topK)
+      .map(({ f }) => f)
+    return ok(scored)
   }
 
   snapshot(): readonly KnowledgeFact[] { return [...this.store.values()] }

@@ -34,6 +34,7 @@ export default defineConfig({
       '@innovation-os/knowledge/graph':       pkg('knowledge/src/graph/index.ts'),
       '@innovation-os/knowledge/repository':  pkg('knowledge/src/repository/index.ts'),
       '@innovation-os/knowledge/embedding':   pkg('knowledge/src/embedding/index.ts'),
+      '@innovation-os/knowledge/recall':      pkg('knowledge/src/recall/index.ts'),
     },
   },
 })

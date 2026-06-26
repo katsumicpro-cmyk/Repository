@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "composite": true,
+    "paths": {
+      "@innovation-os/shared/*":    ["../shared/src/*"],
+      "@innovation-os/foundation/*": ["../foundation/src/*"],
+      "@innovation-os/knowledge/*": ["../knowledge/src/*"]
+    }
+  },
+  "references": [
+    { "path": "../shared" },
+    { "path": "../foundation" },
+    { "path": "../knowledge" }
+  ],
+  "include": ["src/**/*"]
+}

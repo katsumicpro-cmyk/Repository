@@ -24,6 +24,8 @@ export default defineConfig({
       '@innovation-os/foundation/cache':      pkg('foundation/src/cache/index.ts'),
       '@innovation-os/foundation/validation': pkg('foundation/src/validation/index.ts'),
       '@innovation-os/domain/core':       pkg('domain/src/core/index.ts'),
+      '@innovation-os/knowledge/fact':        'src/fact/index.ts',
+      '@innovation-os/knowledge/embedding':   'src/embedding/index.ts',
     },
   },
 })

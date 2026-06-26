@@ -5,6 +5,7 @@
     { "path": "./packages/foundation" },
     { "path": "./packages/domain" },
     { "path": "./packages/knowledge" },
+    { "path": "./packages/infrastructure" },
     { "path": "./packages/application" },
     { "path": "./apps/web" }
   ]
