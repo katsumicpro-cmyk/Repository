@@ -1,0 +1,25 @@
+{
+  "name": "@innovation-os/foundation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./ids": "./src/ids/index.ts",
+    "./time": "./src/time/index.ts",
+    "./logger": "./src/logger/index.ts",
+    "./cache": "./src/cache/index.ts",
+    "./env": "./src/env/index.ts",
+    "./config": "./src/config/index.ts",
+    "./validation": "./src/validation/index.ts",
+    "./telemetry": "./src/telemetry/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "biome check ./src"
+  },
+  "devDependencies": {
+    "typescript": "*",
+    "vitest": "*"
+  }
+}

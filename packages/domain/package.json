@@ -1,0 +1,27 @@
+{
+  "name": "@innovation-os/domain",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./core": "./src/core/index.ts",
+    "./discovery": "./src/discovery/index.ts",
+    "./pattern": "./src/pattern/index.ts",
+    "./principle": "./src/principle/index.ts",
+    "./future": "./src/future/index.ts",
+    "./concept": "./src/concept/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "biome check ./src"
+  },
+  "dependencies": {
+    "@innovation-os/shared": "workspace:*",
+    "@innovation-os/foundation": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "*",
+    "vitest": "*"
+  }
+}

@@ -1,0 +1,5 @@
+export { Entity, AggregateRoot, type EntityProps } from './entity.js'
+export { ValueObject } from './value-object.js'
+export { type DomainEvent, type DomainEventMetadata, type AnyDomainEvent } from './domain-event.js'
+export { type Repository, type PaginationParams, type Page } from './repository.js'
+export { CompositeSpecification, type Specification } from './specification.js'

@@ -1,0 +1,22 @@
+{
+  "name": "@innovation-os/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./types": "./src/types/index.ts",
+    "./errors": "./src/errors/index.ts",
+    "./events": "./src/events/index.ts",
+    "./constants": "./src/constants/index.ts",
+    "./result": "./src/result/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "biome check ./src"
+  },
+  "devDependencies": {
+    "typescript": "*",
+    "vitest": "*"
+  }
+}
