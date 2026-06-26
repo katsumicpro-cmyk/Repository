@@ -10,7 +10,7 @@ import { InitiateReasoningCycleUseCase } from '../reasoning/initiate-reasoning-c
 import { MockHypothesisRepository } from '../reasoning/mock-hypothesis-repository.js'
 import { MockEvidenceRequestRepository } from '../reasoning/mock-evidence-request-repository.js'
 import { ConductResearchUseCase } from './conduct-research.use-case.js'
-import { MockResearchPort } from './mock-research-port.js'
+import { MockKnowledgeSourcePort } from './mock-knowledge-source-port.js'
 import { MockResearchPlanRepository } from './mock-research-plan-repository.js'
 
 async function buildFullSetup(theme: string) {
@@ -40,9 +40,9 @@ async function buildFullSetup(theme: string) {
   const reasoningResult = await reasoningUseCase.execute({ theme })
   if (!isOk(reasoningResult)) throw new Error('Reasoning failed')
 
-  const researchPort = new MockResearchPort(factRepo)
+  const knowledgeSource = new MockKnowledgeSourcePort(factRepo)
   const conductUseCase = new ConductResearchUseCase(
-    factRepo, graphRepo, hypothesisRepo, evidenceRequestRepo, planRepo, researchPort,
+    factRepo, graphRepo, hypothesisRepo, evidenceRequestRepo, planRepo, knowledgeSource,
   )
 
   return {
@@ -134,6 +134,29 @@ describe('ConductResearchUseCase', () => {
       if (!isOk(hypo)) return
       expect(['supported', 'refuted']).toContain(hypo.value.status)
     }
+  })
+
+  it('returns a ResearchTrace with all 5 step types recorded', async () => {
+    const { conductUseCase, evidenceRequestRepo } = await buildFullSetup(theme)
+
+    const openRequests = await evidenceRequestRepo.findByStatus('open')
+    if (!isOk(openRequests) || openRequests.value.length === 0) return
+
+    const result = await conductUseCase.execute({
+      evidenceRequestId: openRequests.value[0]!.id,
+      theme,
+    })
+    if (!isOk(result)) return
+
+    const { trace } = result.value
+    expect(trace.steps.length).toBeGreaterThanOrEqual(4)
+    expect(trace.stepsOfType('question').length).toBeGreaterThan(0)
+    expect(trace.stepsOfType('search').length).toBeGreaterThan(0)
+    expect(trace.stepsOfType('evidence').length).toBeGreaterThan(0)
+    expect(trace.stepsOfType('evaluation').length).toBeGreaterThan(0)
+    expect(trace.stepsOfType('decision').length).toBeGreaterThan(0)
+    expect(trace.completedAt).not.toBeNull()
+    expect(trace.toNarrative()).toContain('QUESTION')
   })
 
   it('rejects empty theme', async () => {
