@@ -4,12 +4,13 @@
   "blueprintVersion": "v1.1",
   "repository": "https://github.com/katsumicpro-cmyk/Repository",
   "branch": "main",
-  "lastCommit": "b408796",
-  "lastCommitMessage": "feat: establish abstraction pipeline",
+  "lastCommit": "0ca8687",
+  "lastCommitMessage": "docs: Blueprint v1.1 — Theory layer, Human Learning Loop, Reflect capability",
 
-  "currentSprint": 7,
-  "currentSprintStatus": "complete",
-  "nextSprint": 8,
+  "currentSprint": 8,
+  "currentSprintStatus": "next",
+  "previousSprint": 7,
+  "previousSprintStatus": "complete",
   "nextSprintName": "Judgment Engine",
 
   "sourceFiles": 146,
