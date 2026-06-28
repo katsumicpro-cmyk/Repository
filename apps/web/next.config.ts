@@ -5,6 +5,8 @@ const config: NextConfig = {
     '@innovation-os/shared',
     '@innovation-os/foundation',
     '@innovation-os/domain',
+    '@innovation-os/knowledge',
+    '@innovation-os/application',
   ],
   experimental: {
     typedRoutes: true,
