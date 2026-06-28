@@ -1,6 +1,7 @@
 {
   "project": "Innovation OS",
-  "lastUpdated": "2026-06-27",
+  "lastUpdated": "2026-06-28",
+  "blueprintVersion": "v1.1",
   "repository": "https://github.com/katsumicpro-cmyk/Repository",
   "branch": "main",
   "lastCommit": "b408796",
@@ -61,8 +62,9 @@
     "sprint7a": { "name": "Learning Cycle", "status": "complete" },
     "sprint7b": { "name": "Invariant Discovery", "status": "complete" },
     "sprint8": { "name": "Judgment Engine", "status": "next" },
-    "sprint9": { "name": "Concept Synthesis", "status": "pending" },
-    "sprint10": { "name": "Innovation Loop", "status": "pending" }
+    "sprint9": { "name": "Predict", "status": "pending" },
+    "sprint10": { "name": "Create", "status": "pending" },
+    "sprint11": { "name": "Reflect", "status": "pending" }
   },
 
   "keyEntities": {

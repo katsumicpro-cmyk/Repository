@@ -1,4 +1,4 @@
-# Innovation OS v1.0 — Blueprint
+# Innovation OS v1.1 — Blueprint
 
 > 人間が世界から学び、抽象化し、未来を構想し、新しい価値を創造するまでの
 > 知的プロセスを、AIと協調して再現・拡張するオペレーティングシステム。
@@ -20,7 +20,14 @@
 Active Knowledge Operating System である。
 ```
 
-**対比**
+Innovation OS は Human を置き換えない。
+
+**Human Intelligence Amplifier** である。
+
+人間が観察し、Innovation OS が構造化する。
+Innovation OS が仮説を生成し、人間が判断する。
+人間が世界に働きかけ、その結果が知識として戻ってくる。
+このループが「知の共進化」である。
 
 | 従来のシステム | Innovation OS |
 |--------------|--------------|
@@ -28,27 +35,99 @@ Active Knowledge Operating System である。
 | 聞かれたら答える | 問われる前に問いを生成する |
 | 検索エンジン | 知性エンジン |
 | 受動的知識 (Passive Knowledge) | 能動的知識 (Active Knowledge) |
+| ツール（Human が使う） | パートナー（Human と共に学ぶ） |
 
 ---
 
 ## 2. Capability Evolution
 
 ```
-Sprint 1–2   ░░░░░░░░░░░░░░░░░░░░░   存在する・発見する
-Sprint 3      ████░░░░░░░░░░░░░░░░░   記憶する
-Sprint 4      ████████░░░░░░░░░░░░░   想起する（意味的距離 + グラフ探索）
-Sprint 5      ████████████░░░░░░░░░   推論する（矛盾発見・仮説生成・問い生成）
-Sprint 6      ████████████████░░░░░   調査する（計画・証拠収集・知識更新）
-Sprint 7      ████████████████████░   原則を持つ（Invariant発見・Principle翻訳）
-              ─────────────────────── ← 現在地
-Sprint 8      判定する（Principleで新発見を解釈）
-Sprint 9      予測する（未来シナリオを構想）
-Sprint 10     概念を生む・価値を創出する
+                                                           現在地
+                                                             ↓
+  Observe    ██████████████████████████████████████████████  Sprint 1–2
+  Remember   ████████████████████████████████████████        Sprint 3
+  Reason     ████████████████████████████████                Sprint 4–5
+  Learn      ████████████████████████                        Sprint 6
+  Generalize ████████████████                                Sprint 7  ←
+  Judge      □□□□□□□□□□□□                                    Sprint 8
+  Predict    □□□□□□□□                                        Sprint 9
+  Create     □□□□□□                                          Sprint 10
+  Reflect    □□□□                                            Sprint 11
+
+  ██ = 獲得済み    □ = 未獲得
+```
+
+**Reflect の定義**
+
+Reflect は単なる「振り返り」ではない。
+
+蓄積した Invariant・Theory・Principle を、
+将来の Evidence によって見直し、
+知識体系そのものを改善する能力である。
+
+```
+過去の Principle が現在の Evidence によって覆された場合、
+  → Principle を deprecated に
+  → 元の Invariant を再検証キューへ
+  → Theory（なぜそう考えたか）を保存したまま次の知識構築に活かす
+
+Reflect は「忘れる能力」ではなく
+「正しく更新する能力」である。
 ```
 
 ---
 
-## 3. Workspace 構成
+## 3. Human Learning Loop
+
+Innovation OS の真の価値は、Human との循環にある。
+知識はシステムの内部で完結しない。
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                   Human ⇄ Innovation OS ⇄ World                │
+│                                                                 │
+│   ┌─────────┐                                                   │
+│   │  Human  │                                                   │
+│   └────┬────┘                                                   │
+│        │ 1. Observe（世界を観察する）                             │
+│        ▼                                                        │
+│   ┌──────────────────┐                                          │
+│   │  Innovation OS   │                                          │
+│   │                  │                                          │
+│   │  2. Remember     │ KnowledgeFact → KnowledgeGraph          │
+│   │  3. Reason       │ 矛盾発見・仮説生成・問い生成              │
+│   │  4. Learn        │ 証拠収集・知識更新                        │
+│   │  5. Generalize   │ Pattern→Invariant→Theory→Principle      │
+│   │  6. Judge        │ 新発見 × Principle → Judgment            │
+│   │  7. Predict      │ FutureScenario 生成                      │
+│   └────────┬─────────┘                                          │
+│            │ 8. Concept（構想を提示する）                         │
+│            ▼                                                    │
+│   ┌─────────┐                                                   │
+│   │  Human  │ 9. 判断・選択・意味付け                            │
+│   └────┬────┘                                                   │
+│        │ 10. Experiment（世界に働きかける）                       │
+│        ▼                                                        │
+│   ┌─────────┐                                                   │
+│   │  World  │ 11. 結果が生まれる                                 │
+│   └────┬────┘                                                   │
+│        │ 12. Knowledge として観測される                          │
+│        ▼                                                        │
+│   ┌──────────────────┐                                          │
+│   │  Innovation OS   │ 13. Reflect（知識体系を見直す）           │
+│   └──────────────────┘                                          │
+│        │                                                        │
+│        └────────────────────────────────► Human へ戻る          │
+│                                                                 │
+│   このループが「知の共進化」である。                               │
+│   Innovation OS は Human の思考を拡張するが、                    │
+│   Human の判断を代替しない。                                     │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 4. Workspace 構成
 
 ```
 innovation-os/
@@ -65,7 +144,7 @@ innovation-os/
 │   ├── manifesto/           Active Knowledge Manifesto
 │   ├── architecture/        Clean Architecture 解説
 │   ├── intelligence/        知性獲得ロードマップ（Why this order）
-│   └── capabilities/        Sprint1.md〜Sprint10.md（能力の記録）
+│   └── capabilities/        Sprint1.md〜Sprint11.md（能力の記録）
 ├── PROJECT_MEMORY.md    # セッション間永続記憶
 ├── PROJECT_STATE.json   # マシン可読な現在状態
 └── NEXT_SESSION.md      # 次回開始ガイド
@@ -73,7 +152,7 @@ innovation-os/
 
 ---
 
-## 4. Domain 構成（packages/knowledge）
+## 5. Domain 構成（packages/knowledge）
 
 ```
 knowledge/
@@ -102,15 +181,20 @@ knowledge/
 ├── learning/     LearningCycle  trigger → hypotheses → evidence → changes → newQuestions
 │                                isActivelyLearning() が自律学習の証明
 │
-└── principle/    ExtractedPattern  → PatternToInvariantExtractor
-                  Invariant          candidate→validated/refuted/superseded  stabilityScore
-                  → InvariantToPrincipleTranslator × domain
-                  Principle          draft→active→deprecated  sourceInvariantId必須
+└── principle/    ExtractedPattern（現象）
+                    ↓ PatternToInvariantExtractor
+                  Invariant（本質）    candidate→validated/refuted/superseded
+                    ↓ InvariantToTheoryBuilder          ← [設計済・未実装]
+                  Theory（説明）       なぜそうなるのかの因果モデル
+                    ↓ TheoryToPrincipleTranslator        ← [設計済・未実装]
+                  Principle（処方）    draft→active→deprecated  sourceInvariantId必須
 ```
 
 ---
 
-## 5. Knowledge Flow
+## 6. Knowledge Flow
+
+Theory Layer を含む完全な抽象化パイプライン。
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -123,28 +207,50 @@ knowledge/
 │    │                                        │                   │
 │    │                            PatternExtractor                │
 │    │                                        │                   │
-│    │                            ExtractedPattern（現象）         │
+│    │                      ExtractedPattern（現象）               │
+│    │                      「このグラフで何が繰り返し現れるか」     │
 │    │                                        │                   │
 │    │                    PatternToInvariantExtractor             │
 │    │                                        │                   │
-│    │                            Invariant（本質）                │
-│    │                            candidate → validated           │
+│    │                         Invariant（本質）                   │
+│    │                         「世界が変わっても成立するか」        │
+│    │                         candidate → validated              │
+│    │                         stabilityScore: 0.0〜1.0           │
 │    │                                        │                   │
-│    │                    InvariantToPrincipleTranslator×domain   │
+│    │                    InvariantToTheoryBuilder                │
 │    │                                        │                   │
-│    │                            Principle（処方）                │
-│    │                            draft → active                  │
+│    │                           Theory（説明）                    │
+│    │                           「なぜそうなるのか」               │
+│    │                           ← Explainability の中心          │
+│    │                                        │                   │
+│    │                    TheoryToPrincipleTranslator × domain    │
+│    │                                        │                   │
+│    │                         Principle（処方）                   │
+│    │                         「このドメインでどう使うか」          │
+│    │                         draft → active                     │
 │    │                                        │                   │
 │    │                    [Sprint 8] PrincipleJudge               │
 │    └──────────────────────────────────────► Judgment            │
-│                                   reinforces/contradicts/       │
-│                                   extends/novel                 │
+│                                   reinforces / contradicts /    │
+│                                   extends / novel               │
+│                                             │                   │
+│                              [Sprint 11] ReflectionEngine       │
+│                                   Principle見直し・Invariant再検証│
 └─────────────────────────────────────────────────────────────────┘
 ```
 
+**4層の責務**
+
+| 層 | 問い | 例 |
+|---|------|---|
+| Pattern | 何が見えるか | 「A→B という因果が3回観測された」 |
+| Invariant | 何が変わらないか | 「複雑なシステムは単一障害点を持つ」 |
+| Theory | なぜそうなるか | 「依存が集中すると除去コストが指数増大するため」 |
+| Principle | どう使うか | 「共有DBを排除し、各サービスに独自DBを持たせる」 |
+
 ---
 
-## 6. AI Agent Flow
+## 7. AI Agent Flow
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -186,15 +292,17 @@ knowledge/
 
 ---
 
-## 7. Repository 構成
+## 8. Repository 構成
 
 ```
 packages/knowledge/src/
 ├── principle/
 │   ├── invariant.ts                  Invariant Entity
+│   ├── theory.ts                     Theory Entity         [設計済・未実装]
 │   ├── principle.ts                  Principle Entity
 │   ├── pattern-to-invariant.ts       PatternToInvariantExtractor
-│   └── invariant-to-principle.ts     InvariantToPrincipleTranslator
+│   ├── invariant-to-theory.ts        InvariantToTheoryBuilder  [設計済・未実装]
+│   └── theory-to-principle.ts        TheoryToPrincipleTranslator [設計済・未実装]
 │
 packages/application/src/
 ├── discovery/                        Discovery生成・保存
@@ -212,20 +320,21 @@ packages/infrastructure/src/
 
 **Entity ID prefix 一覧**
 
-| Entity | Prefix | 例 |
-|--------|--------|----|
-| KnowledgeFact | `kfct_` | `kfct_a1b2c3...` |
-| KnowledgeGraph | `kgrph_` | `kgrph_...` |
-| Hypothesis | `hypo_` | `hypo_...` |
-| EvidenceRequest | `evreq_` | `evreq_...` |
-| ResearchPlan | `rplan_` | `rplan_...` |
-| LearningCycle | `lcyc_` | `lcyc_...` |
-| Invariant | `invt_` | `invt_...` |
-| Principle | `prpl_` | `prpl_...` |
+| Entity | Prefix | Status |
+|--------|--------|--------|
+| KnowledgeFact | `kfct_` | ✅ 実装済 |
+| KnowledgeGraph | `kgrph_` | ✅ 実装済 |
+| Hypothesis | `hypo_` | ✅ 実装済 |
+| EvidenceRequest | `evreq_` | ✅ 実装済 |
+| ResearchPlan | `rplan_` | ✅ 実装済 |
+| LearningCycle | `lcyc_` | ✅ 実装済 |
+| Invariant | `invt_` | ✅ 実装済 |
+| Theory | `thry_` | 🔜 Sprint 8+ |
+| Principle | `prpl_` | ✅ 実装済 |
 
 ---
 
-## 8. Architecture Layers
+## 9. Architecture Layers
 
 ```
 ┌───────────────────────────────────────────────┐
@@ -243,7 +352,8 @@ packages/infrastructure/src/
 ┌───────────────────▼───────────────────────────┐
 │  Domain  (packages/knowledge + domain)        │
 │  Entity / ValueObject / DomainEvent           │
-│  KnowledgeFact / Invariant / Principle ...    │
+│  KnowledgeFact / Invariant / Theory /         │
+│  Principle ...                                │
 │  ← AIを知らない。DBを知らない。純粋なロジック    │
 └───────────────────┬───────────────────────────┘
                     │ built on
@@ -274,15 +384,15 @@ Domain は例外を投げない（Result<T,E>）
 
 ---
 
-## 9. 10 Sprint 知性獲得ロードマップ
+## 10. 知性獲得ロードマップ（11 Sprint）
 
 ```
-Level 0   Sprint 1–2  [ Infrastructure + Discovery ]
+Level 0   Sprint 1–2  [ Observe ]
           ・monorepo / TypeScript strict / Vitest / Biome
           ・Discovery Entity → KnowledgeFact 変換
           ・証明: ビルドが通る。型が通る。テストが走る。
 
-Level 1   Sprint 3    [ Memory ]
+Level 1   Sprint 3    [ Remember ]
           ・KnowledgeGraph（nodes + typed edges）
           ・KnowledgeFact（content / confidence / source / tags）
           ・証明: Discovery → KnowledgeGraph への変換が一貫している
@@ -292,74 +402,119 @@ Level 2   Sprint 4    [ Recall ]
           ・activationScore = (relevance × confidence) + graphBonus
           ・証明: 情報検索ではなく「知識想起」。グラフ探索で予期せぬ接続を発見
 
-Level 3   Sprint 5    [ Reasoning ]
+Level 3   Sprint 5    [ Reason ]
           ・ContradictionEngine / PatternExtractor / HypothesisGenerator
           ・EvidenceRequest 自動生成（AIなし・決定論的）
           ・証明: generatedQuestionsCount > 0。人間が問う前に問いが生まれる
 
-Level 4   Sprint 6    [ Research ]
+Level 4   Sprint 6    [ Learn ]
           ・ResearchPlan + ConductResearchUseCase
           ・EvidenceEvaluator（pluggable epistemology）
           ・ResearchTrace（完全監査証跡）
           ・証明: Sprint5 が生成した問いを Sprint6 が自律的に解決する
 
-Level 5   Sprint 7    [ Principle ]                          ← 現在地
+Level 5   Sprint 7    [ Generalize ]                        ← 現在地
           ・PatternToInvariantExtractor（決定論的変換）
           ・Invariant（candidate→validated / stabilityScore）
           ・InvariantToPrincipleTranslator（domain-parameterized）
           ・証明: Pattern/Invariant/Principle の責務が型レベルで分離されている
 
-Level 6   Sprint 8    [ Judgment ]                           ← 次回
+Level 6   Sprint 8    [ Judge ]                             ← 次回
+          ・Theory Layer 導入（Invariant→Theory→Principle）
           ・PrincipleJudge: Discovery × active Principle → Judgment
           ・verdict: reinforces / contradicts / extends / novel
           ・証明: 新しい Discovery を投入するとシステムが自律的に判定を返す
 
-Level 7   Sprint 9    [ Prediction ]
+Level 7   Sprint 9    [ Predict ]
           ・supported Hypothesis + Principle → FutureScenario
           ・確率・タイムライン・前提条件付きシナリオ生成
           ・証明: 「もし X が成立するなら、3年後に Y が起きる」を生成できる
 
-Level 8   Sprint 10   [ Innovation ]
+Level 8   Sprint 10   [ Create ]
           ・FutureScenario × Constraint → Concept Entity
           ・LearningCycle 全パイプライン自律実行
+          ・Innovation は Outcome（結果）であり Capability（能力）ではない
           ・証明: 人間が「テーマ」を入力するだけで Concept まで到達する
+
+Level 9   Sprint 11   [ Reflect ]
+          ・ReflectionEngine: 過去の Principle を現在の Evidence で見直す
+          ・Invariant の再検証キュー（Challenge の自動トリガー）
+          ・Theory の保存（なぜそう考えたかを記録して次の学習に活かす）
+          ・証明: 誤った Principle が自律的に deprecated になる
+                  知識体系が自己修正できる
 ```
 
 ---
 
-## 10. 今後 5 年間の発展イメージ
+## 11. 今後 5 年間の発展イメージ
 
 ```
 2026  v1.0  Knowledge Engine（現在）
-│           Sprint 1–7 完了。Invariant発見・Principle合成まで。
+│           Sprint 1–7 完了。Generalize まで。
 │           Mock実装。AIなし。In-memory。
 │
-2026  v1.5  Judgment Engine
-│           Sprint 8–10 完了。Discovery → Concept の全パイプライン。
+2026  v1.5  Judgment + Creation Engine
+│           Sprint 8–10 完了。Judge・Predict・Create の全パイプライン。
 │           Active Learning Loop の自律実行。
+│           Theory Layer 導入（Explainability 基盤完成）。
 │
-2027  v2.0  Connected Intelligence
+2027  v2.0  Connected + Reflective Intelligence
+│           Sprint 11 完了。Reflect（知識体系の自己修正）。
 │           KnowledgeSourcePort: Web / PDF / Academic / GitHub / Slack / Notion
-│           EmbeddingPort: Claude API 統合（Semantic Recall の精度向上）
-│           Supabase永続化（KnowledgeFact / Graph / Principle）
-│           ResearchTrace の永続化（Explainability Layer 完成）
+│           EmbeddingPort: Claude API 統合
+│           Supabase永続化（KnowledgeFact / Graph / Theory / Principle）
 │
 2028  v3.0  Collaborative Intelligence
 │           複数ユーザーによる KnowledgeGraph 共同構築
-│           Principle の合意形成（誰がこの Principle を支持するか）
+│           Theory の合意形成（なぜそうなるかを組織で共有）
 │           Team Learning Cycle（組織単位の学習ログ）
 │           Contradiction Alert（新発見が既存 Principle と矛盾したとき通知）
 │
 2029  v4.0  Domain Intelligence
-│           業界・組織固有の Invariant ライブラリ
+│           業界・組織固有の Invariant・Theory ライブラリ
 │           Principle の継承（親 Principle → 子 Principle）
 │           Inter-domain transfer（ソフトウェアの Invariant → 組織設計へ）
 │           AI-assisted Challenge（Claude が Invariant を能動的に検証）
 │
-2030  v5.0  Creative Intelligence
+2030  v5.0  Amplified Intelligence
+│           Human ⇄ Innovation OS ⇄ World の完全な学習ループ
 │           Concept から Product / Service / Organization の設計まで
-│           Innovation Loop: 世界観察 → 原則発見 → 未来構想 → 概念生成 → 価値創出
-│           人間とAIが対等なパートナーとして知識を共進化させる基盤
+│           Reflect が常時稼働し、知識体系が自己最適化し続ける
+│           人間の判断とAIの知識構造が対等に共進化するプラットフォーム
+```
+
+---
+
+## 12. Capability Map（Sprint 別進捗）
+
+現時点（Sprint 7 完了）の能力分布。Sprint が進むたびに更新する。
+
+```
+  Capability     現在の実装深度                          Sprint
+  ─────────────────────────────────────────────────────────────
+  Observe        ██████████████████████████████████████  1–2
+  Remember       ████████████████████████████████        3
+  Reason         █████████████████████████               4–5
+  Learn          ████████████████████                    6
+  Generalize     ████████████████                        7   ←
+  ─────────────────────────────────────────────────────────────
+  Judge          □□□□□□□□□□□□□□□□                        8
+  Predict        □□□□□□□□□□□□                            9
+  Create         □□□□□□□□                                10
+  Reflect        □□□□□□                                  11
+  ─────────────────────────────────────────────────────────────
+  ██ = 獲得済み    □ = 未獲得
+
+  凡例:
+  Observe    = 世界から事実を取得する
+  Remember   = 事実をグラフとして構造化する
+  Reason     = 矛盾・パターン・仮説を見つける
+  Learn      = 調査を計画・実行し知識を更新する
+  Generalize = Pattern→Invariant→Principle へ抽象化する
+  Judge      = Principle で新発見を解釈・判定する
+  Predict    = 原則と仮説から未来シナリオを生成する
+  Create     = シナリオと制約から概念を構想する
+  Reflect    = 知識体系そのものを見直し・改善する
 ```
 
 ---
@@ -376,5 +531,5 @@ Level 8   Sprint 10   [ Innovation ]
 
 ---
 
-*Innovation OS v1.0 — Sprint 7 Complete*
+*Innovation OS v1.1 — Sprint 7 Complete*
 *Repository: https://github.com/katsumicpro-cmyk/Repository*
